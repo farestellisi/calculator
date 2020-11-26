@@ -1,84 +1,72 @@
-function add(a, b){
-    var sum = a + b;
-    return sum
-};
+let operations = {
+    '+':(a,b) => a + b,
+    '-':(a,b) => a - b,
+    '/':(a,b) => a / b,
+    '*':(a,b) => a * b
+}
+ 
+//onclick function to create input string 
 
-function subtract(a, b){
-    let amount = a - b;
-    return amount
-};
+let input
 
-function multiply(a, b){
-    let amount = a * b;
-    return amount
-};
-
-function divide(a, b){
-    if (b === 0){
-        return 'Infinity'
-    }
-    let amount = a/b;
-    return amount
-};
-
-function operate(operator, num1, num2){
-    switch (operator){
-        case '+':
-            return add(num1, num2)
-            break;
-        case '-':
-            return subtract(num1, num2)
-            break;
-        case '*':
-            return multiply(num1, num2)
-            break;
-        case '/':
-            return divide(num1, num2)
-            break;
-    }
-};
-
-let input = "2*2+2"
-let numArr = input.split(/\D/g);
-let opArr = input.split(/\d/g).filter(Boolean);
-
-function masterCalc(numArr, opArr){
-    if (opArr.includes('/') === true){
-        let ind = opArr.indexOf('/')
-        let result = operate('/', numArr[ind], numArr[ind + 1])
-        opArr.splice(ind, 1)
-        numArr.splice(ind, 2, result)
-        masterCalc(numArr,opArr)  
-    }
-    if (opArr.includes('*') === true){
-        let ind = opArr.indexOf('*')
-        let result = operate('*', numArr[ind], numArr[ind + 1])
-        opArr.splice(ind, 1)
-        numArr.splice(ind, 2, result)
-        masterCalc(numArr,opArr)  
-    }
-    if (opArr.includes('+') === true){
-        let ind = opArr.indexOf('+')
-        let result = operate('+', numArr[ind], numArr[ind + 1])
-        opArr.splice(ind, 1)
-        numArr.splice(ind, 2, result)
-        masterCalc(numArr,opArr)  
-    }
-    if (opArr.includes('-') === true){
-        let ind = opArr.indexOf('-')
-        let result = operate('-', numArr[ind], numArr[ind + 1])
-        opArr.splice(ind, 1)
-        numArr.splice(ind, 2, result)
-        masterCalc(numArr,opArr)  
-    }
+function calcInput(str){
+//concat strings to create input string
+    let val = str
+    input = val + input
 }
 
-masterCalc(numArr, opArr)
+//innerHTML of input string
+document.getElementById("output").innerHTML = input
+ 
+// match numbers including decimal
 
-console.log(numArr)
+let numArr = input.match(/\d+(?:\.\d+)?/g).map(Number);
+// match only valid operation chars, probs not necessary if you'll have only these operation buttons
+let opArr = input.match(/[+\-\/*]/g);
 
 
+function masterCalc(numArr, opArr){
+    let ind
+    let op
+    if (opArr.includes('/')){
+        ind = opArr.indexOf('/')
+        op = '/'
+    }
+    else if (opArr.includes('*')){
+        ind = opArr.indexOf('*')
+        op = '*'  
+    }
+    else if (opArr.includes('+')){
+        ind = opArr.indexOf('+')
+        op = '+'
+    }
+    else if (opArr.includes('-')){
+        ind = opArr.indexOf('-')
+        op = '-' 
+    }
+    // need a break condition to break out of recursion
+    else if(opArr.length === 0){return}
+ 
+    let result = operations[op](numArr[ind], numArr[ind + 1])
+    opArr.splice(ind, 1)
+    numArr.splice(ind, 2, result)
+    masterCalc(numArr,opArr)
+    //innerHTML removal of input string
+    document.getElementById("output").innerHTML = (numArr[0])
+    
+}
+ 
 
+// call master calc on equal button//
+
+let calc = () => masterCalc(numArr, opArr);
+
+//clear function
+
+ function cle(){
+     input = ''
+     document.getElementById("output").innerHTML = input
+ }
 
 
 

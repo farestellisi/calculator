@@ -4,7 +4,7 @@
     <head>
 
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
-        <title>Etch-A-Sketch</title>
+        <title>Calculator</title>
         <script type="text/javascript" src="script.js" defer></script>
 
     </head>
@@ -14,24 +14,24 @@
            <div class="output">
                 <p id="output"></p>
            </div>
-           <div class = "function">
-                <button class = "add" type="button">+</button>
-                <button class = "subtract" type="button">-</button>
-                <button class = "multiply" type="button">x</button>
-                <button class = "divide" type="button">/</button>
-                <button class = "equal" type="button">=</button>
-                <button class = "clear" type="button">clear</button>
+           <div class = "calculator">
+                <button class = "+" type="button" value="+" onclick="calcInput('+');">+</button>
+                <button class = "-" type="button" value="-" onclick="calcInput('-');">-</button>
+                <button class = "x" type="button" value="x" onclick="calcInput('x');">x</button>
+                <button class = "/" type="button" value="/" onclick="calcInput('/');">/</button>
+                <button class = "equal" type="button" value="=" onclick="calc();">=</button>
+                <button class = "clear" type="button" value="clear" onclick="cle();">clear</button>
             </div>
             <div class = "numbers">
-                <button class = "one" type="button">1</button>
-                <button class = "two" type="button">2</button>
-                <button class = "three" type="button">3</button>
-                <button class = "four" type="button">4</button>
-                <button class = "five" type="button">5</button>
-                <button class = "six" type="button">6</button>
-                <button class = "seven" type="button">7</button>
-                <button class = "eight" type="button">8</button>
-                <button class = "nine" type="button">9</button>
+                <button class = "1" type="button" value="1" onclick="calcInput('1');">1</button>
+                <button class = "2" type="button" value="2" onclick="calcInput('2');">2</button>
+                <button class = "3" type="button" value="3" onclick="calcInput('3');">3</button>
+                <button class = "4" type="button" value="4" onclick="calcInput('4');">4</button>
+                <button class = "5" type="button" value="5" onclick="calcInput('5');">5</button>
+                <button class = "6" type="button" value="6" onclick="calcInput('6');">6</button>
+                <button class = "7" type="button" value="7" onclick="calcInput('7');">7</button>
+                <button class = "8" type="button" value="8" onclick="calcInput('8');">8</button>
+                <button class = "9" type="button" value="9" onclick="calcInput('9');">9</button>
             </div>
        </div>
     </body>
